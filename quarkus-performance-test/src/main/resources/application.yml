@@ -15,3 +15,14 @@ quarkus:
   liquibase:
     change-log: db/master.yml
     migrate-at-start: true
+
+  log:
+    console:
+      async: true
+      enable: true
+      level: DEBUG
+    file:
+      enable: true
+      async: true
+      path: ../quarkus-performace-tests.log
+
