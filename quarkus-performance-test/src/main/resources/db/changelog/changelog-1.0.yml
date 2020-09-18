@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: createCovid19Table
+      author: Davide Martorana
+      changes:
+        - createTable:
+            tableName: covid19_italy_stats
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: datetime
+              - column:
+                  name: country
+                  type: varchar(60)
+              - column:
+                  name: hospitalized_patients_symptoms
+                  type: varchar(60)
+              - column:
+                  name: hospitalized_patients_intensive_care
+                  type: int
+              - column:
+                  name: total_hospitalized_patients
+                  type: int
+              - column:
+                  name: home_confinement_cases
+                  type: int
+              - column:
+                  name: total_current_confirmed_cases
+                  type: int
+              - column:
+                  name: new_current_confirmed_cases
+                  type: int
+              - column:
+                  name: new_total_confirmed_cases
+                  type: int
+              - column:
+                  name: recovered
+                  type: int
+              - column:
+                  name: deaths
+                  type: int
+              - column:
+                  name: total_confirmed_cases
+                  type: int
+              - column:
+                  name: tests_performed
+                  type: int
+              - column:
+                  name: note
+                  type: varchar(200)
+

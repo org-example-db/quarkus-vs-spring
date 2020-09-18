@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: loadDataIntoCovid19Table
+      author: Davide Martorana
+      changes:
+        - loadData:
+            file: 'db/data/covid19-italy.csv'
+            tableName: covid19_italy_stats
+
+
+

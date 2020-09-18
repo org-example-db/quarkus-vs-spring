@@ -1,0 +1,17 @@
+quarkus:
+  http:
+    port: 8080
+    root-path: /api
+
+  datasource:
+    db-kind: postgresql
+    username: ${PG_USER}
+    password: ${PG_PWD}
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/covid19_italy?currentSchema=public
+      max-size: 10
+      min-size: 5
+
+  liquibase:
+    change-log: db/master.yml
+    migrate-at-start: true
