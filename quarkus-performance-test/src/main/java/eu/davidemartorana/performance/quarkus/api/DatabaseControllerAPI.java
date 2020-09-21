@@ -30,7 +30,7 @@ public class DatabaseControllerAPI {
     @GET
     @Path("/italy-dates")
     public List<Covid19ItalyStats> getListWithDateParams(@QueryParam("start") ISOLocalDate start,
-                                                              @QueryParam("end") ISOLocalDate end ) {
+                                                         @QueryParam("end") ISOLocalDate end ) {
 
         return  this.covid19DataService.getBetween(start, end);
     }
