@@ -1,4 +1,4 @@
-package eu.davidemartorana.performance.quarkus.api;
+package eu.davidemartorana.performance.quarkus.model;
 
 import javax.ws.rs.BadRequestException;
 import java.time.LocalDate;

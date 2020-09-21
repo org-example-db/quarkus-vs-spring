@@ -1,11 +1,11 @@
 package eu.davidemartorana.performance.quarkus.api;
 
 import eu.davidemartorana.performance.quarkus.jpa.Covid19ItalyStats;
+import eu.davidemartorana.performance.quarkus.model.ISOLocalDate;
 import eu.davidemartorana.performance.quarkus.services.Covid19DataService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Date;
 import java.util.List;
 
 @Path("/covid19")
@@ -29,7 +29,7 @@ public class DatabaseControllerAPI {
 
     @GET
     @Path("/italy-dates")
-    public List<Covid19ItalyStats> getListItalyDateWithParams(@QueryParam("start") ISOLocalDate start,
+    public List<Covid19ItalyStats> getListWithDateParams(@QueryParam("start") ISOLocalDate start,
                                                               @QueryParam("end") ISOLocalDate end ) {
 
         return  this.covid19DataService.getBetween(start, end);

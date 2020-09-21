@@ -1,6 +1,6 @@
 package eu.davidemartorana.performance.quarkus.services;
 
-import eu.davidemartorana.performance.quarkus.api.ISOLocalDate;
+import eu.davidemartorana.performance.quarkus.model.ISOLocalDate;
 import eu.davidemartorana.performance.quarkus.jpa.Covid19ItalyStats;
 import eu.davidemartorana.performance.quarkus.jpa.Covid19ItalyStatsRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -9,16 +9,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.ws.rs.BadRequestException;
-import javax.ws.rs.NotFoundException;
-import javax.ws.rs.PathParam;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.List;
 
 @ApplicationScoped
