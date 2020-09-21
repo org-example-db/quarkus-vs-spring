@@ -3,6 +3,7 @@ package eu.davidemartorana.performance.quarkus.services.impl;
 import eu.davidemartorana.performance.quarkus.model.ISOLocalDate;
 import eu.davidemartorana.performance.quarkus.jpa.Covid19ItalyStats;
 import eu.davidemartorana.performance.quarkus.jpa.Covid19ItalyStatsRepository;
+import eu.davidemartorana.performance.quarkus.services.Covid19DataService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @ApplicationScoped
-public class Covid19DataServiceImpl implements eu.davidemartorana.performance.quarkus.services.Covid19DataService {
+public class Covid19DataServiceImpl implements Covid19DataService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Covid19DataServiceImpl.class);
 
