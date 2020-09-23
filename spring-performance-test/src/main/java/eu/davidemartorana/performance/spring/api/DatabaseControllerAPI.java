@@ -23,13 +23,10 @@ public class DatabaseControllerAPI {
     }
 
     @GetMapping("/italy")
-    public List<Covid19ItalyStats> getListWithParams(@RequestParam(value = "start", required = false) @DateTimeFormat(iso= DateTimeFormat.ISO.DATE) LocalDate start,
+    public List<Covid19ItalyStats> getListWithParams(@RequestParam(value = "start", required = false, defaultValue = "2020-01-01") @DateTimeFormat(iso= DateTimeFormat.ISO.DATE) LocalDate start,
                                                      @RequestParam(value = "end", required = false) @DateTimeFormat(iso= DateTimeFormat.ISO.DATE) LocalDate end ) {
 
-        final LocalDate startDate = start == null ? LocalDate.of(2020, 01,01): start;
-        final LocalDate endDate = end == null ? LocalDate.now().plusDays(1) : end;
-
-        return  this.covid19DataService.getBetween(startDate, endDate);
+        return  this.covid19DataService.getBetween(start, end);
     }
 
     @GetMapping("/italy/{id}")

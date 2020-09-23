@@ -26,3 +26,4 @@ quarkus:
       async: true
       path: ../quarkus-performace-tests.log
 
+

@@ -1,8 +1,24 @@
-# performance-test project
+# Performance-test project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+## Application generation
+
+This project was created through Maven with the following command:
+```shell script
+mvn io.quarkus:quarkus-maven-plugin:1.8.1.Final:create     
+     -DprojectGroupId=eu.davidemartorana.performance.quarkus
+     -DprojectArtifactId=quarkus-performance-test
+     -Dextensions="resteasy-jackson,jdbc-postgresql,hibernate-orm,agroal,config-yaml"
+```
+
+In a later stage [Liquibase](https://www.liquibase.org/) extension for Quarkus has been added, witht he command:
+```shell script
+mvn quarkus:add-extension 
+     -Dextensions="liquibase"
+```
 
 ## Running the application in dev mode
 
