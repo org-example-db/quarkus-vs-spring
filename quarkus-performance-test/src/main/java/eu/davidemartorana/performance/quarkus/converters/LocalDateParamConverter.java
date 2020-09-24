@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class LocalDateParamConverter implements ParamConverter {
+public class LocalDateParamConverter implements ParamConverter<LocalDate> {
 
 
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
@@ -21,7 +21,7 @@ public class LocalDateParamConverter implements ParamConverter {
 
 
     @Override
-    public Object fromString(String value) {
+    public LocalDate fromString(String value) {
         try {
             return LocalDate.parse(value, dateTimeFormatter);
         } catch (final DateTimeParseException e) {
@@ -31,11 +31,7 @@ public class LocalDateParamConverter implements ParamConverter {
     }
 
     @Override
-    public String toString(Object value) {
-        if(value instanceof LocalDate){
-            final LocalDate localDate = (LocalDate) value;
-            return localDate.format(dateTimeFormatter);
-        }
-        throw new IllegalArgumentException("Given object is not instance of LocalDate.");
+    public String toString(LocalDate value) {
+        return value.format(dateTimeFormatter);
     }
 }
