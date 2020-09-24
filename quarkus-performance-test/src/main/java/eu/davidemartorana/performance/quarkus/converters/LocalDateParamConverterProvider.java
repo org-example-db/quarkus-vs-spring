@@ -23,10 +23,9 @@ public class LocalDateParamConverterProvider implements ParamConverterProvider {
 
             if(dateTimeFormatAnnotation.isPresent()) {
                 final String pattern = ((DateTimeFormat) dateTimeFormatAnnotation.get()).pattern();
-                return new LocalDateParamConverter().setDateTimeFormatter(pattern);
-
+                return (ParamConverter<T>) new LocalDateParamConverter().setDateTimeFormatter(pattern);
             }
-            return INSTANCE;
+            return (ParamConverter<T>) INSTANCE;
         }
 
         return null;
