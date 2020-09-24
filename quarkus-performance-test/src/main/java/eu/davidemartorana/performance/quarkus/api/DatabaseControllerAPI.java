@@ -1,11 +1,12 @@
 package eu.davidemartorana.performance.quarkus.api;
 
+import eu.davidemartorana.performance.quarkus.converters.DateTimeFormat;
 import eu.davidemartorana.performance.quarkus.jpa.Covid19ItalyStats;
-import eu.davidemartorana.performance.quarkus.model.ISOLocalDate;
 import eu.davidemartorana.performance.quarkus.services.Covid19DataService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDate;
 import java.util.List;
 
 @Path("/covid19")
@@ -19,18 +20,11 @@ public class DatabaseControllerAPI {
         this.covid19DataService = covid19DataService;
     }
 
+
     @GET
     @Path("/italy")
-    public List<Covid19ItalyStats> getListWithParams(@QueryParam("start") String start,
-                                                     @QueryParam("end") String end ) {
-
-        return  this.covid19DataService.getBetween(start, end);
-    }
-
-    @GET
-    @Path("/italy-dates")
-    public List<Covid19ItalyStats> getListWithDateParams(@QueryParam("start") @DefaultValue("2020-01-01") ISOLocalDate start,
-                                                         @QueryParam("end") ISOLocalDate end ) {
+    public List<Covid19ItalyStats> getListWithDateParams(@QueryParam("start") @DateTimeFormat(pattern = "yyyy-MM-dd") @DefaultValue("2020-01-01") LocalDate start,
+                                                         @QueryParam("end") LocalDate end ) {
 
         return  this.covid19DataService.getBetween(start, end);
     }
