@@ -7,6 +7,7 @@
     <groupId>eu.davidemartorana.performance.quarkus</groupId>
     <artifactId>quarkus-performance-test</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <properties>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
@@ -25,6 +26,7 @@
 
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -36,6 +38,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>

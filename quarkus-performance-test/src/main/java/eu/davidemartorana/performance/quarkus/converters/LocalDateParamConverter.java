@@ -12,7 +12,7 @@ public class LocalDateParamConverter implements ParamConverter<LocalDate> {
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
     private String pattern = "yyyy-MM-dd";
 
-    public LocalDateParamConverter setDateTimeFormatter(final String pattern) {
+    public LocalDateParamConverter setDateTimeFormatterPattern(final String pattern) {
         this.dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
         this.pattern = pattern;
 
