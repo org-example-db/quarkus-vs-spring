@@ -1,7 +1,6 @@
 package eu.davidemartorana.performance.quarkus.jpa;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.NotFoundException;

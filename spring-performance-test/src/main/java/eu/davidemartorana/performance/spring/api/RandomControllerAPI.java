@@ -19,9 +19,9 @@ public class RandomControllerAPI {
         this.messageService = messageService;
     }
 
-    @GetMapping("/time")
+    @GetMapping("/date")
     public Message getRandomTime() {
-        return this.messageService.generateRandomTime();
+        return this.messageService.generateRandomDate();
     }
 
     @GetMapping("/description")

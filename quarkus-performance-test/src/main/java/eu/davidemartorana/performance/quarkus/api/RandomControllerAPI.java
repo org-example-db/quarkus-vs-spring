@@ -16,9 +16,9 @@ public class RandomControllerAPI {
     protected MessageService messageService;
 
     @GET
-    @Path("/time")
+    @Path("/date")
     public Message getRandomTime() {
-        return this.messageService.generateRandomTime();
+        return this.messageService.generateRandomDate();
     }
 
     @GET
