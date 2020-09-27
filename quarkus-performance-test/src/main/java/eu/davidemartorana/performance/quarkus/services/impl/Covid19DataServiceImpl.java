@@ -29,7 +29,7 @@ public class Covid19DataServiceImpl implements Covid19DataService {
     @Override
     public List<Covid19ItalyStats> getBetween(final ISOLocalDate start, final ISOLocalDate end) {
         final LocalDate startDate = getDateOrDefault(start, START_DATE);
-        final LocalDate endDate = getDateOrDefault(end, LocalDate.now().plusDays(1));
+        final LocalDate endDate = getDateOrDefault(end, LocalDate.now()).plusDays(1);
 
         LOGGER.debug("Retrieving data from '{}' to '{}'", startDate, endDate);
 
