@@ -35,13 +35,10 @@ public class Covid19DataServiceImpl implements Covid19DataService {
     }
 
     @Override
-    public Covid19ItalyStats getById(final long id) {
+    public Optional<Covid19ItalyStats> getById(final long id) {
         LOGGER.debug("Retrieving data by Id '{}'.", id);
         final Optional<Covid19ItalyStats> optionalResult = this.covid19ItalyStatsRepository.findById(id);
-
-        return optionalResult
-                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND,
-                        String.format("Item with Id: [%s] not found.", id)));
+        return optionalResult;
     }
 
     private LocalDate getDateOrDefault(final LocalDate date, final LocalDate defaultDate) {

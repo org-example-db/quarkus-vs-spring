@@ -9,32 +9,33 @@ import org.apache.commons.lang3.StringUtils;
 import javax.annotation.Priority;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Singleton;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Singleton
 @Alternative
 @Priority(1)
 public class MessageServiceImpl implements MessageService {
 
-    private final static LocalDateTime START = LocalDateTime.of(1970,01,01, 0, 0);
+    private final static LocalDate START = LocalDate.of(2020,01,01);
     private final static AtomicBoolean BOOLEAN_FLAG = new AtomicBoolean(true);
 
     @Override
-    public Message generateRandomTime() {
-        final long gap = MINUTES.between(START, LocalDateTime.now());
+    public Message generateRandomDate() {
+        final long gap = DAYS.between(START, LocalDate.now());
         final long random = RandomUtils.nextLong(0, gap);
 
         // Generate Random time between now and the beginning
-        final LocalDateTime newRandomTime = MINUTES.addTo(START,random);
+        final LocalDate newRandomTime = DAYS.addTo(START,random);
 
         return  Message.builder()
                 .description("Random Generated Time")
                 .code(200)
-                .dateTime(newRandomTime)
+                .dateTime(newRandomTime.atStartOfDay())
                 .build();
     }
 

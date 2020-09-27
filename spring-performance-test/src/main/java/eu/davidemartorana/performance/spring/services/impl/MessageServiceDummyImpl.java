@@ -9,7 +9,7 @@ public class MessageServiceDummyImpl implements MessageService {
 
 
     @Override
-    public Message generateRandomTime() {
+    public Message generateRandomDate() {
         return null;
     }
 

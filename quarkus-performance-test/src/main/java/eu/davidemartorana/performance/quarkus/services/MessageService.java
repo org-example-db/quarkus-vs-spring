@@ -4,7 +4,7 @@ import eu.davidemartorana.performance.quarkus.model.Message;
 
 public interface MessageService {
 
-    Message generateRandomTime();
+    Message generateRandomDate();
 
     Message generateRandomDescription();
 
