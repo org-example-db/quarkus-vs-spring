@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class Covid19DataServiceImpl implements Covid19DataService {
@@ -24,7 +25,7 @@ public class Covid19DataServiceImpl implements Covid19DataService {
     @Override
     public List<Covid19ItalyStats> getBetween(final LocalDate start, final LocalDate end) {
         final LocalDate startDate = getDateOrDefault(start, START_DATE);
-        final LocalDate endDate = getDateOrDefault(end, LocalDate.now().plusDays(1));
+        final LocalDate endDate = getDateOrDefault(end, LocalDate.now()).plusDays(1);
 
         LOGGER.debug("Retrieving data from '{}' to '{}'", startDate, endDate);
 
