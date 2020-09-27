@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>gatling-performance-tester</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <scala-maven-plugin.version>4.0.2</scala-maven-plugin.version>
+        <io.gatling.version>3.4.0</io.gatling.version>
+        <gatling-plugin.version>3.1.0</gatling-plugin.version>
+        <scala-lang.version>2.12.8</scala-lang.version>
+        <simulation-description>default-name</simulation-description>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${io.gatling.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>${scala-maven-plugin.version}</version>
+                <!--                <configuration>-->
+                <!--                    <args>-->
+                <!--                        <arg>-target:jvm-1.8</arg>-->
+                <!--                        <arg>-deprecation</arg>-->
+                <!--                        <arg>-feature</arg>-->
+                <!--                        <arg>-unchecked</arg>-->
+                <!--                        <arg>-language:implicitConversions</arg>-->
+                <!--                        <arg>-language:postfixOps</arg>-->
+                <!--                    </args>-->
+                <!--                </configuration>-->
+                <!--                <executions>-->
+                <!--                    <execution>-->
+                <!--                        <goals>-->
+                <!--                            <goal>compile</goal>-->
+                <!--                            <goal>testCompile</goal>-->
+                <!--                        </goals>-->
+                <!--                    </execution>-->
+                <!--                </executions>-->
+            </plugin>
+
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>${gatling-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
