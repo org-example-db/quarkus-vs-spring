@@ -1,6 +1,7 @@
 package eu.davidemartorana.performance.quarkus.jpa;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 
 import javax.persistence.*;

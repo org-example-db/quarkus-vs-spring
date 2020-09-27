@@ -32,7 +32,8 @@ public class DatabaseControllerAPI {
     @GET
     @Path("/italy/{id}")
     public Covid19ItalyStats getById(@PathParam("id") Integer id) {
-        return  this.covid19DataService.getById(id);
+        return  this.covid19DataService.getById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Item with Id: [%s] not found.", id)));
     }
 
 }

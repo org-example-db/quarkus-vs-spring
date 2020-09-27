@@ -32,7 +32,7 @@ public class Covid19DataServiceImpl implements Covid19DataService {
     }
 
     @Override
-    public Covid19ItalyStats getById(final int id){
+    public Optional<Covid19ItalyStats> getById(final int id){
         LOGGER.debug("Retrieving data by Id '{}'.", id);
 
         return  this.covid19ItalyStatsRepository.getById(id);
