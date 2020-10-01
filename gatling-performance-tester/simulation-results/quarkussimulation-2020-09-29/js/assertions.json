@@ -1,0 +1,10 @@
+{
+  "simulation": "eu.davidemartorana.performance.gatling.simulations.QuarkusSimulation",
+  "simulationId": "quarkussimulation",
+  "start": 1601405662459,
+  "description": "",
+  "scenarios": ["Simulating Workflow on Quarkus Application"],
+  "assertions": [
+
+  ]
+}

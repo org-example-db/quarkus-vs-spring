@@ -1,0 +1,10 @@
+{
+  "simulation": "eu.davidemartorana.performance.gatling.simulations.SpringSimulation",
+  "simulationId": "springsimulation",
+  "start": 1601405334610,
+  "description": "",
+  "scenarios": ["Simulating Workflow on Spring Application"],
+  "assertions": [
+
+  ]
+}
