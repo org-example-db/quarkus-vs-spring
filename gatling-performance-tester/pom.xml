@@ -43,7 +43,7 @@
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>${scala-maven-plugin.version}</version>
-                <!--                <configuration>-->
+<!--                                <configuration>-->
                 <!--                    <args>-->
                 <!--                        <arg>-target:jvm-1.8</arg>-->
                 <!--                        <arg>-deprecation</arg>-->
@@ -52,7 +52,7 @@
                 <!--                        <arg>-language:implicitConversions</arg>-->
                 <!--                        <arg>-language:postfixOps</arg>-->
                 <!--                    </args>-->
-                <!--                </configuration>-->
+<!--                                </configuration>-->
                 <!--                <executions>-->
                 <!--                    <execution>-->
                 <!--                        <goals>-->
