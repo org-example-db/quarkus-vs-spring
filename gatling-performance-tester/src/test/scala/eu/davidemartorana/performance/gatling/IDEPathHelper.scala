@@ -1,11 +1,11 @@
 package eu.davidemartorana.performance.gatling
 
-import java.nio.file.Path
+import java.nio.file.{Path, Paths}
 
 import io.gatling.commons.util.PathHelper._
 
 object IDEPathHelper {
-  val gatlingConfUrl: Path = getClass.getClassLoader.getResource("gatling.conf")
+  val gatlingConfUrl: Path = Paths.get(getClass.getClassLoader.getResource("gatling.conf").toURI)
   val projectRootDir = gatlingConfUrl.ancestor(3)
 
   val mavenSourcesDirectory = projectRootDir / "src" / "src/test/scala/test" / "scala"

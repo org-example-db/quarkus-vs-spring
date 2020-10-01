@@ -2,17 +2,18 @@ package eu.davidemartorana.performance.spring.api;
 
 import eu.davidemartorana.performance.spring.model.Message;
 import eu.davidemartorana.performance.spring.services.MessageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/random")
 public class RandomControllerAPI {
 
     final private MessageService messageService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RandomControllerAPI.class);
 
     @Autowired
     public RandomControllerAPI(final MessageService messageService){
@@ -30,7 +31,8 @@ public class RandomControllerAPI {
     }
 
     @PostMapping("/format")
-    public Message receiveMessage(final Message message) {
+    public Message receiveMessage(@RequestBody final Message message) {
+        LOGGER.trace("Received Message:\n{}", message);
         this.messageService.modifyingMessage(message);
         return message;
     }

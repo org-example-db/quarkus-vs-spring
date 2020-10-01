@@ -5,34 +5,28 @@ import io.gatling.http.Predef._
 
 object RandomsEndpoints {
 
-  val retrieveRandomDateTime = exec(
+  val retrieveRandomDate = exec(
     http("Get Random Time")
-      .get("random/time")
+      .get("/random/date")
       .check(status.is(200))
-      .check(jsonPath("$.dateTime").exists.saveAs("randomTime"))
+      .check(jsonPath("$.dateTime").saveAs("randomDate"))
   );
 
 
   val retrieveRandomDescription = exec(
     http("Get Random Description")
-      .get("random/description")
+      .get("/random/description")
       .check(status.is(200))
-      .check(jsonPath("$.description").exists.saveAs("randomDescription"))
+      .check(jsonPath("$.description").saveAs("randomDescription"))
   );
 
   val reformatRandomly = exec(
-      session => {
-        session
-          .set("random-time", session("randomTime").as[String])
-          .set("random-description", session("randomDescription").as[String])
-      }
-    )
-    .exec(
       http("Format Json Body Randomly")
         .post("/random/format")
-        .body(ElFileBody("load-test/random-format-request.tmpl.json"))
+        .body(ElFileBody("load-test/random-format-request.tmpl.json")).asJson
+        .check(bodyString.saveAs("formattedBody"))
         .check(status.is(200))
-        .check(jsonPath("$.dateTime").exists)
-        .check(jsonPath("$.description").exists)
+        .check(checkIf("${enableAssertions}")(jsonPath("$.dateTime").exists))
+        .check(checkIf("${enableAssertions}")(jsonPath("$.description").exists))  //Not sure
   );
 }
