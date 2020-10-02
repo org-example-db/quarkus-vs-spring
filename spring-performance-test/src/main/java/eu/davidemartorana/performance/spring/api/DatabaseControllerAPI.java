@@ -2,12 +2,11 @@ package eu.davidemartorana.performance.spring.api;
 
 import eu.davidemartorana.performance.spring.jpa.Covid19ItalyStats;
 import eu.davidemartorana.performance.spring.services.Covid19DataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.websocket.server.PathParam;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/covid19")
+@RequestMapping(value = "/covid19")
 public class DatabaseControllerAPI {
 
     private final Covid19DataService covid19DataService;
@@ -33,7 +32,7 @@ public class DatabaseControllerAPI {
     }
 
     @GetMapping("/italy/{id}")
-    public Covid19ItalyStats getById(@PathParam("id") Long id) {
+    public Covid19ItalyStats getById(@PathVariable("id") long id) {
         final Optional<Covid19ItalyStats> optionalResult = this.covid19DataService.getById(id);
 
         return optionalResult

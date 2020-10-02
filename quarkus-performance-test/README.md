@@ -33,7 +33,13 @@ If an instance of PostgreSQL is running locally and listening to the given port(
 
 As soon as the application gets connected with PostgreSQL the beans of [Liquibase](https://www.liquibase.org/) will read the configuration in `resources\db\master.yml` and will create the table in the database. 
 As expected by the normal behaviour of Liquibase, the database **IS NOT** created, and neither is the schema. Both are expected to be already present. 
- 
+
+### Adding Panache
+
+```shell script
+mvnw quarkus:add-extensions 
+     -Dextensions="hibernate-orm-panache"
+``` 
 
 ## Running the application in dev mode
 

@@ -12,13 +12,25 @@ import static io.restassured.RestAssured.given;
 public class RandomControllerAPITest {
 
     @Test
-    public void getRandomTimeTest() {
+    public void getRandomDateTest() {
         given()
                 .when()
-                    .get("/random/time")
+                    .accept(MediaType.APPLICATION_JSON)
+                    .get("/random/date")
                 .then()
                     .contentType(MediaType.APPLICATION_JSON)
                     .statusCode(200);
+    }
+
+    @Test
+    public void getRandomDescriptionTest() {
+        given()
+                .when()
+                .accept(MediaType.APPLICATION_JSON)
+                .get("/random/description")
+                .then()
+                .contentType(MediaType.APPLICATION_JSON)
+                .statusCode(200);
     }
 
 }
