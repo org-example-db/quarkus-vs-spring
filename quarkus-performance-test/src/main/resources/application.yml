@@ -8,9 +8,12 @@ quarkus:
     username: ${PG_USER}
     password: ${PG_PWD}
     jdbc:
-      url: jdbc:postgresql://localhost:5432/covid19_italy?currentSchema=public
+      url: jdbc:postgresql://${PG_HOST_NAME:localhost}:${PG_HOST_PORT:5432}/covid19_italy?currentSchema=public
       max-size: 10
       min-size: 5
+
+  hibernate-orm:
+    dialect:  io.quarkus.hibernate.orm.runtime.dialect.QuarkusPostgreSQL10Dialect
 
   liquibase:
     change-log: db/master.yml
@@ -24,4 +27,10 @@ quarkus:
     file:
       enable: true
       async: true
-      path: ../quarkus-performace-tests.log
+      path: ${LOG_DIR:..}/quarkus-performace-tests.log
+
+  native:
+    builder-image: davidemartorana/mandrel-native-static:centos8
+    native-image-xmx: 8g
+    additional-build-args:
+      - "--static"

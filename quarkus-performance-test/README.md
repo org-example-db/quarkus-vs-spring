@@ -8,15 +8,15 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 This project was created through Maven with the following command:
 ```shell script
-mvn io.quarkus:quarkus-maven-plugin:1.8.1.Final:create     
-     -DprojectGroupId=eu.davidemartorana.performance.quarkus
-     -DprojectArtifactId=quarkus-performance-test
-     -Dextensions="resteasy-jackson,jdbc-postgresql,hibernate-orm,agroal,config-yaml"
+  $ mvn io.quarkus:quarkus-maven-plugin:1.8.1.Final:create     
+      -DprojectGroupId=eu.davidemartorana.performance.quarkus
+      -DprojectArtifactId=quarkus-performance-test
+      -Dextensions="resteasy-jackson,jdbc-postgresql,hibernate-orm,agroal,config-yaml"
 ```
 
 In a later stage [Liquibase](https://www.liquibase.org/) extension for Quarkus has been added, witht he command:
 ```shell script
-mvn quarkus:add-extension 
+  $ mvn quarkus:add-extension \ 
      -Dextensions="liquibase"
 ```
 
@@ -37,15 +37,15 @@ As expected by the normal behaviour of Liquibase, the database **IS NOT** create
 ### Adding Panache
 
 ```shell script
-mvnw quarkus:add-extensions 
-     -Dextensions="hibernate-orm-panache"
+  $ ./mvnw quarkus:add-extensions \ 
+       -Dextensions="hibernate-orm-panache"
 ``` 
 
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
-```
-./mvnw quarkus:dev -DPG_USER=<database username> -DPG_PWD=<database password>
+```shell script
+  $ ./mvnw quarkus:dev -DPG_USER=<database username> -DPG_PWD=<database password>
 ```
 
 ## Packaging and running the application
@@ -71,20 +71,33 @@ The mvn command lines remain the same: `./mvnw package`.
 
 You can create a native executable using: 
 ```shell script
-  ./mvnw package -Dquarkus.package.type=native -DPG_USER=<database username> -DPG_PWD=<database password>
+  $ ./mvnw package -Dquarkus.package.type=native -DPG_USER=<database username> -DPG_PWD=<database password>
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+Or, if you want to build it with [Mandrel](https://github.com/graalvm/mandrel) (a downstream distribution of GraalVM), or you don't have a GraalVM installed locally, you can run the native executable build in a container with Mandrel installed using:
+```shell script
+  $ ./mvnw clean package -Pnative -Dquarkus.native.container-build=true -DPG_USER=<database username> -DPG_PWD=<database password>
 ```
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
+Please note that the command line above builds a ***Linux*** native executable file.
 
 ### Running the native executable
 You can then execute your native executable with:
 ```shell script
- ./target/quarkus-performance-test-runner -DPG_USER=<database username> -DPG_PWD=<database password>
+ $ ./target/quarkus-performance-test-runner -DPG_USER=<database username> -DPG_PWD=<database password>
 ```
 
+### Building a Docker Image with the native executable 
+Assuming Docker is installed in the current workstation, you can build a new Docker image using the command:
+```shell script
+  $ docker build -f src/main/docker/Dockerfile.native -t <your domain prefix>/performance-test .
+```
+
+### Running the container
+If the image has been successfully created, then:
+
+```shell script
+  $ docker run --env "PG_PWD=<database password>" --env "PG_USER=<database username>" <your domain prefix>/performance-test
+```
 
 ### Other Resources
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
