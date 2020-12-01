@@ -1,7 +1,6 @@
 quarkus:
   http:
     port: 8080
-    root-path: /api
 
   datasource:
     db-kind: postgresql
@@ -19,18 +18,38 @@ quarkus:
     change-log: db/master.yml
     migrate-at-start: true
 
+  smallrye-openapi:
+    path: /openapi-test
+
+  swagger-ui:
+    always-include: true
+    enable: true
+    path: /swagger-openapi
+
+
   log:
     console:
-      async: true
+#      async: true
       enable: true
       level: DEBUG
     file:
       enable: true
-      async: true
+#      async: true
+      level: DEBUG
       path: ${LOG_DIR:..}/quarkus-performace-tests.log
+    level: FINEST
+
+#
+#  package:
+#    type: uber-jar
 
   native:
-    builder-image: davidemartorana/mandrel-native-static:centos8
+#     builder-image: davidemartorana/mandrel-native-static:centos8
+    builder-image: quay.io/quarkus/ubi-quarkus-mandrel:20.2-java11
     native-image-xmx: 8g
-    additional-build-args:
-      - "--static"
+
+cron:
+  scheduler:
+    expr: "0  0/1  * * * ?"       # This works like a charm
+#    expr: "0 0/60 * * * ?"     This does not work fails with error: java.lang.IllegalArgumentException: Period 60 not in range [0, 59]
+

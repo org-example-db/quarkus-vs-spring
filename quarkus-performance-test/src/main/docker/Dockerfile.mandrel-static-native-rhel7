@@ -1,0 +1,43 @@
+FROM registry.redhat.io/rhel7
+
+ARG MANDREL_VERSION_NO=20.2.0.0.Beta1
+ARG MANDREL_LNX_NAME=mandrel-java11-linux-amd64-$MANDREL_VERSION_NO
+ARG MANDREL_ARCH_FILENAME=mandrel-linux.tar.gz
+ARG MANDREL_PKG=https://github.com/graalvm/mandrel/releases/download/mandrel-$MANDREL_VERSION_NO/$MANDREL_LNX_NAME.tar.gz
+ARG MANDREL_OPT_DIR=mandrel-java11-$MANDREL_VERSION_NO
+ARG QUARKUS_HOME=/home/quarkus
+# ARG TOOLS_LIST="wget tar gzip unzip shadow-utils"
+ARG TOOLS_LIST="wget unzip"
+
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
+
+RUN set -eux \
+      && dnf install -y 'dnf-command(config-manager)' \
+      && dnf config-manager --enable PowerTools \
+      && dnf install -y gcc glibc-devel zlib-devel zlib-static libffi-devel glibc-static libstdc++-static $TOOLS_LIST \
+#      && dnf install -y glibc-devel zlib-devel libffi-devel glibc-static gcc-c++ gcc libstdc++-devel libstdc++-static $TOOLS_LIST \
+      && wget --quiet -O /tmp/$MANDREL_ARCH_FILENAME $MANDREL_PKG \
+      && tar x -z -C /opt -f /tmp/$MANDREL_ARCH_FILENAME \
+      && ln -s /opt/$MANDREL_OPT_DIR/ /opt/mandrel \
+      && groupadd -r quarkus -g 1001 \
+      && useradd -u 1001 -r -g 1001 -m -d $QUARKUS_HOME -s /sbin/nologin -c "Quarkus user" quarkus \
+      && dnf remove -y $TOOLS_LIST 'dnf-command(config-manager)' \
+      && dnf clean all \
+      && rm -rf /var/log/* \
+      && rm -rf /var/cache/* \
+      && rm -rf /tmp/*
+
+
+ENV JAVA_HOME=/opt/mandrel
+ENV GRAALVM_HOME="$JAVA_HOME"
+ENV PATH="$JAVA_HOME/bin:$PATH"
+
+VOLUME /project
+
+USER 1001
+
+WORKDIR /project
+
+ENTRYPOINT ["native-image"]

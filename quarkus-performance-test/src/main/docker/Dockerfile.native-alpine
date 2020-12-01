@@ -7,31 +7,30 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native-alpine-busybox -t quarkus/performance-test .
+# docker build -f src/main/docker/Dockerfile.native-alpine -t quarkus/performance-test .
 #
 # Then run the container using:
 #
 # docker run -i --rm -p 8080:8080 quarkus/performance-test
 #
 ###
-FROM busybox:glibc
-ARG QUARKUS_HOME=/home/quarkus
-ARG LOG_DIR=/var/logs
+#FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
+FROM alpine
+ENV PG_USER=username \
+    PG_PWD=password \
+    PG_HOST_NAME=host.docker.internal \
+    PG_HOST_PORT=5432 \
+    LOG_DIR=/var/log/application
 
-COPY target/*-runner /app/application
-
-WORKDIR /app
-
-RUN set -eux \
-    && addgroup -g 1001 quarkus\
-    && adduser -u 1001 -G quarkus -h $QUARKUS_HOME -s /sbin/nologin -D quarkus \
-    && chown quarkus:quarkus /app \
-    && chown quarkus:quarkus /app/* \
-    && chmod 744 /app/* \
+WORKDIR /work/
+RUN chown 1001 /work \
+    && chmod "g+rwX" /work \
+    && chown 1001:root /work \
     && mkdir ${LOG_DIR} \
     && chmod "a+rwx" ${LOG_DIR}
+COPY --chown=1001:root target/*-runner /work/application
 
 EXPOSE 8080
-USER quarkus
+USER 1001
 
 CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
